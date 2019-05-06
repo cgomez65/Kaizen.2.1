@@ -17,6 +17,7 @@
     "body-parser": "^1.18.3",
     "bootstrap": "^4.3.1",
     "compression": "^1.7.3",
+    "eslint": "^4.12.1",
     "express": "^4.16.4",
     "jquery": "^3.4.0",
     "mysql2": "^1.6.5",
@@ -40,7 +41,7 @@
     "react-hot-loader": "^4.7.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.0",
-    "webpack": "^4.29.6",
+    "webpack": "^4.30.0",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1"
   }

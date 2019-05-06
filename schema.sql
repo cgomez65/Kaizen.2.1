@@ -24,3 +24,13 @@ CREATE TABLE Habits (
 
 INSERT INTO Habits (id, habit, fecha) VALUES (1, "Making the bed every day", curdate());
 INSERT INTO Habits (id, habit, fecha) VALUES (2, "Silence phone at 10 pm", curdate());
+
+CREATE TABLE Comments (
+  id int NOT NULL AUTO_INCREMENT,
+  comment varchar(150) NOT NULL,
+  fecha DATE NOT NULL,
+  PRIMARY KEY (ID)
+);
+
+INSERT INTO Comments (id, habit, fecha) VALUES (1, "I need to finish up my habits", curdate());
+INSERT INTO Comments (id, habit, fecha) VALUES (2, "Screw this", curdate());

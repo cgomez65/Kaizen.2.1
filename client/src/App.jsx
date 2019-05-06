@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import AddTask from './components/AddTask';
 import Archived from './components/Archive';
 import HowTos from './components/HowTo';
+import AddComment from './components/AddComment'
 
 function Root() {
   return (
@@ -15,6 +16,7 @@ function Root() {
       <input placeholder="Password" type="password" id="pass" name="password"/>
       <button><Link className="LinksPW" to="/main/">Login</Link></button>
     </center>
+    <AddComment />
   </div>
   )
 }
@@ -60,6 +62,7 @@ class App extends Component {
         <Route path="/main/" component={Main} />
         <Route path="/archive/" component={Archive} />
         <Route path="/howto/" component={HowTo} />
+        <Route path="/add-comment/" component={AddComment} />
       </div>
     </Router> 
     )

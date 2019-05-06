@@ -1,6 +1,7 @@
 const express = require('express')
 const tasksRoutes = express.Router()
 const getConnection = require('./getConnection.js')
+
 // Displays all tasks in database
 getInfoFromDatabase = (callback) => {
   getConnection().query('SELECT * FROM Tasks', (err, data) => {
@@ -20,7 +21,29 @@ tasksRoutes.get('/tasks', (req, res) => {
     }
   });
 });
+
+getInfoFromDatabase = (callback) => {
+  getConnection().query('SELECT * FROM Comments', (err, data) => {
+    if(err){
+      callback(err, null);
+    }else{
+      callback(null, data)
+    }
+  });
+};
+
+tasksRoutes.get('/comment', (req, res) => {
+  getInfoFromDatabase((err, data) => {
+    if(err){
+      res.sendStatus(500)
+    }else{
+      res.json(data)
+    }
+  });
+});
+
 // post
+
 insertOne = (task, cb) => {
   getConnection().query('INSERT INTO Tasks (task, progress) VALUES(?, 0)', [task], (err, results, fields ) => {
     if(err) {
@@ -32,6 +55,7 @@ insertOne = (task, cb) => {
     }
   });
 };
+
 tasksRoutes.post('/tasks', (req,res) => {
   const task = req.body.task;
   if(!task){
@@ -48,6 +72,36 @@ tasksRoutes.post('/tasks', (req,res) => {
     });  
   }
 });
+
+insertOne = (comment, cb) => {
+  getConnection().query('INSERT INTO Comments (comments) VALUES(?, 0)', [comment], (err, results, fields ) => {
+    if(err) {
+      console.log('There is something wrong with the insert query', err);
+      cb(err, null);
+    } else {
+      console.log(`Added ${comment} with the following info:`, results);
+      cb(null, results);
+    }
+  });
+};
+
+tasksRoutes.post('/comment', (req,res) => {
+  const comment = req.body.comment;
+  if(!comment){
+    res.sendStatus(400);
+    console.log(comment);
+  }else{
+    insertOne(comment, (err, results) => {
+      if(err){
+        res.sendStatus(500);
+        console.log(err);
+      }else{
+        res.status(200).json(results);
+      }
+    });  
+  }
+});
+
 // delete
 deleteOne = (task, cb) => {
   getConnection().query("DELETE FROM Tasks WHERE (task)=?", [task], (err, results, fields) => {
